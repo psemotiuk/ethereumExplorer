@@ -1,17 +1,54 @@
+$blockWidth: 172px;
+
+@mixin blockRows {
+    margin-top: 20px;
+    background: #C4C4C4;
+    border-radius: 8px;
+    padding: 0px 4px;
+    font-size: 1rem;
+    text-align: center;
+}
+
 .blockWrapper {
-    width: 142px;
-    height: 142px;
+    min-width: $blockWidth;
+    max-width: $blockWidth;
+    height: fit-content;
     background: #FDF9F9;
     border-radius: 6px;
+    margin: 10px;
 
-    .blockTitle{
-        font-family: Ubuntu;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 16px;
-        letter-spacing: 0.03em;
+    .innerWrapper {
+        padding: 8px;
 
-        color: #0B1933;
+
+        .blockTitle {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 1.3rem;
+            line-height: 16px;
+            text-align: center;
+    
+            color: #0B1933;
+        }
+    
+        .blockNonce {
+            @include blockRows();
+        }
+        .prevHash {
+            @include blockRows();
+        }
+        .transactionsRow {
+            @include blockRows();
+
+            border-radius: 2px;
+            padding: 2px 6px;
+            border: 2px solid #0B1933;
+
+            &:hover {
+                transition: 0.03s ease-in;
+                background-color: #0B1933;
+                color: #fff;
+            }
+        }
     }
 }
