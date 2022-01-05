@@ -1,11 +1,11 @@
 import React from 'react';
 
-import styles from './styles.module.scss';
+import './styles.scss'
 
 const Header = () => {
     return (
-        <div className={styles.headerWrapper}>
-            <p className={styles.headerTitle}>Etherum explorer</p>
+        <div className='headerWrapper'>
+            <p className='headerTitle'>Etherum explorer</p>
         </div>
     )
 }

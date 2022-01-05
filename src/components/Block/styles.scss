@@ -1,4 +1,4 @@
-$blockWidth: 172px;
+$blockWidth: 215px;
 
 @mixin blockRows {
     margin-top: 20px;
@@ -7,6 +7,8 @@ $blockWidth: 172px;
     padding: 0px 4px;
     font-size: 1rem;
     text-align: center;
+    overflow: hidden;
+    // text-overflow: ellipsis;
 }
 
 .blockWrapper {
@@ -14,7 +16,8 @@ $blockWidth: 172px;
     max-width: $blockWidth;
     height: fit-content;
     background: #FDF9F9;
-    border-radius: 6px;
+    border-radius: 10px;
+    border: 1px solid rgb(229, 232, 235);
     margin: 10px;
 
     .innerWrapper {
@@ -43,6 +46,7 @@ $blockWidth: 172px;
             border-radius: 2px;
             padding: 2px 6px;
             border: 2px solid #0B1933;
+            cursor: pointer;
 
             &:hover {
                 transition: 0.03s ease-in;
@@ -50,5 +54,11 @@ $blockWidth: 172px;
                 color: #fff;
             }
         }
+    }
+
+    :hover {
+        box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+        transition: all 0.1s ease 0s;
+        border-radius: 10px;
     }
 }
