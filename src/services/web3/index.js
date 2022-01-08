@@ -5,7 +5,6 @@ import Web3 from 'web3';
 export const web3Instance = new Web3(window.web3.currentProvider);
 console.log('eth', window.web3.currentProvider);
 
-
 // export const getBlockNumber = async () => {
 //     const recentBlockNumber = await web3.eth.getBlockNumber();
 
@@ -25,40 +24,34 @@ console.log('eth', window.web3.currentProvider);
 // })
 
 export const getRecentBlockNumber = async () => {
-    const recentBlock = await web3Instance.eth.getBlockNumber();
+  const recentBlock = await web3Instance.eth.getBlockNumber();
 
-    return recentBlock;
-}
+  return recentBlock;
+};
 
 export const getBLock = async (id) => {
-    const block = await web3Instance.eth.getBlock(id);
+  const block = await web3Instance.eth.getBlock(id);
 
-    return block;
-}
+  return block;
+};
 
 export const getLastTenBlocks = async () => {
-    const recentBlock = await getRecentBlockNumber();
-    const firstOfTen = recentBlock - 10;
-    const blockList = [];
+  const recentBlock = await getRecentBlockNumber();
+  const firstOfTen = recentBlock - 10;
+  const blockList = [];
 
-    for (let i = firstOfTen; i < recentBlock; i++) {
-        blockList.push(await getBLock(i));
-    }
+  for (let i = firstOfTen; i < recentBlock; i++) {
+    blockList.push(await getBLock(i));
+  }
 
-    return blockList;
-}
+  return blockList;
+};
 
 export const getTransaction = async (hashNumber) => {
-    const transaction = await web3Instance.eth.getTransaction(hashNumber);
+  const transaction = await web3Instance.eth.getTransaction(hashNumber);
 
-    return transaction;
-}
+  return transaction;
+};
 
-export const getBlockTransactions = async (hashes) => {
-    const transactions = [];
-    hashes.forEach(async hashString => {
-        const transaction = await getTransaction(hashString);
-        transactions.push(transaction);
-    })
-    return transactions;
-}
+export const getBlockTransactions = async (hashes) =>
+  Promise.all(hashes.map(async (hashString) => getTransaction(hashString)));

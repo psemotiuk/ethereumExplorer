@@ -24,7 +24,7 @@ export const BlocksProvider = ({ children }) => {
 
     
 
-    const [lastBlockState, setLastBlocksState] = useState(lastBlocks);
+    const [lastBlockState, setLastBlocksState] = useState([]);
 
     console.log('lastblocksState', lastBlockState);
 

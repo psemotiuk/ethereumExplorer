@@ -39,8 +39,4 @@ export const COLUMNS = [
     Header: 'Gas price',
     accessor: 'gasPrice',
   },
-  {
-    Header: 'Input',
-    accessor: 'input',
-  },
 ];
