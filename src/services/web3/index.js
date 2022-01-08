@@ -53,3 +53,12 @@ export const getTransaction = async (hashNumber) => {
 
     return transaction;
 }
+
+export const getBlockTransactions = async (hashes) => {
+    const transactions = [];
+    hashes.forEach(async hashString => {
+        const transaction = await getTransaction(hashString);
+        transactions.push(transaction);
+    })
+    return transactions;
+}

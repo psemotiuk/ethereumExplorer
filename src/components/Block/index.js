@@ -10,7 +10,9 @@ const Block = ({ nonce, parentHash, number, transactions }) => {
 
     const pH = truncate(parentHash, 3);
 
-    console.log('ph', pH);
+    // console.log('ph', pH);
+
+    // console.log('transactionKeys', transactions)
     
 
     // window.addEventListener('load', function () {
@@ -48,7 +50,7 @@ const Block = ({ nonce, parentHash, number, transactions }) => {
                 <div className='prevHash'>Prev hash: {pH}</div>
                 <Link 
                     to={`/txs?block=${number}`}
-                    params={{transactions: transactions}}
+                    state={{transactionsHashes: transactions }}
                 >
                     <div className='transactionsRow'> 
                         {`< Transactions >`} 
