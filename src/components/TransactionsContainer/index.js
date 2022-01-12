@@ -1,142 +1,205 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { useParams, useSearchParams, useLocation } from 'react-router-dom';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
+import {
+  useParams,
+  useSearchParams,
+  useLocation,
+  Link,
+} from 'react-router-dom';
 import { getBlockTransactions } from '../../services/web3';
 import { useTable } from 'react-table';
 import { COLUMNS } from '../../utils/table';
 
 import Loader from 'react-loader-spinner';
 
-
-import './styles.scss';
+// import './styles.scss';
 import './table.scss';
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import TablePagination from '@mui/material/TablePagination';
 
-const TransactionsContainer = () => {
+function createData(
+  hash,
+  nonce,
+  blockHash,
+  blockNumber,
+  transactionIndex,
+  from,
+  to,
+  value,
+  gas,
+  gasPrice
+) {
+  return {
+    hash,
+    nonce,
+    blockHash,
+    blockNumber,
+    transactionIndex,
+    from,
+    to,
+    value,
+    gas,
+    gasPrice,
+  };
+}
+
+const TransacationsContainer = () => {
   const [transactions, setTransactions] = useState([]);
   const [isTransasctionFetched, setIsTransactionsFetched] = useState(false);
   const location = useLocation();
   const { transactionsHashes } = location.state;
 
-  const fetchTransactions = async () => {
-    try {
-      const transactionsFetched = await getBlockTransactions(transactionsHashes);
-      setTransactions(transactionsFetched);
-      setIsTransactionsFetched(true)
-    } catch (error) {
-      return error;
-    }  
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
 
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
+  const emptyRows =
+    rowsPerPage -
+    Math.min(rowsPerPage, transactions.length - page * rowsPerPage);
+
+  const fetchTransactions = async () => {
+    try {
+      const transactionsFetched = await getBlockTransactions(
+        transactionsHashes
+      );
+      setTransactions(transactionsFetched);
+      setIsTransactionsFetched(true);
+    } catch (error) {
+      return error;
+    }
+  };
+
+  let rows = useRef([]);
   useEffect(() => {
     fetchTransactions();
   }, []);
 
-  
-  // const columns = useMemo(() => COLUMNS, []);
+  console.log(transactions[0]);
 
-  // const data = useMemo(() => transactions, []);
+  useEffect(() => {
+    if (transactions.length > 0) {
+      rows.current = transactions.map(
+        ({
+          hash,
+          nonce,
+          blockHash,
+          blockNumber,
+          transactionIndex,
+          from,
+          to,
+          value,
+          gas,
+          gasPrice,
+        }) =>
+          createData(
+            hash,
+            nonce,
+            blockHash,
+            blockNumber,
+            transactionIndex,
+            from,
+            to,
+            value,
+            gas,
+            gasPrice
+          )
+      );
+    }
+    console.log('transactions', transactions);
+  }, [transactions]);
 
-  // const tableInstance = useTable({
-  //   columns,
-  //   data,
-  // });
+  const tableHeaders = [
+    'Hash',
+    'Nonce',
+    'Block hash',
+    'Block number',
+    'Transaction index',
+    'From',
+    'To',
+    'Value',
+    'Gas',
+    'Gas price',
+  ];
 
-  // const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = tableInstance;
-
-  return (
-    //   <table {...getTableProps()}>
-    //       <thead >
-    //           {
-    //               headerGroups.map(headerGroup => (
-    //                 <tr {...headerGroup.getHeaderGroupProps()}>
-    //                     {
-    //                         headerGroup.headers.map( column => (
-    //                             <th {...column.getHeaderProps()}>
-    //                                 {column.render('Header')}
-    //                             </th>
-    //                         ))
-    //                     }
-    //                 </tr>
-    //               ))
-    //           }
-    //       </thead>
-    //       <tbody {...getTableBodyProps()}>
-    //           {
-    //               rows.map(row => {
-    //                   prepareRow(row)
-    //                   return (
-    //                       <tr {...row.getRowProps()}>
-    //                           {
-    //                               row.cells.map( cell => {
-    //                                   return <td {...cell.getCellProps()}>
-    //                                       {cell.render('Cell')}
-    //                                   </td>
-    //                               })
-    //                           }
-    //                       </tr>
-    //                   )
-    //               })
-    //           }
-    //       </tbody>
-    //   </table>
-    // )
-    <table>
-        <thead> 
-            <tr> 
-                <th> Hash </th>
-                <th> Nonce </th>
-                <th> Block hash </th>
-                <th> Block number </th>
-                <th> Transaction index </th>
-                <th> From </th>
-                <th> To </th>
-                <th> Value </th>
-                <th> Gas </th>
-                <th> Gas price </th>
-            </tr>
-        </thead>
-        <tbody>
-            {
-              transactions.map(transaction => (
-                <tr>
-                    <td> 
-                        {transaction.hash}
-                    </td>
-                    <td> 
-                        {transaction.nonce}
-                    </td>
-                    <td> 
-                        {transaction.blockHash}
-                    </td>
-                    <td> 
-                        {transaction.blockNumber}
-                    </td>
-                    <td> 
-                        {transaction.transactionIndex}
-                    </td>
-                    <td> 
-                        {transaction.from}
-                    </td>
-                     <td> 
-                        {transaction.to}
-                    </td>
-                    <td> 
-                        {transaction.value}
-                    </td>
-                    <td> 
-                        {transaction.gas}
-                    </td>
-                    <td> 
-                        {transaction.gasPrice}
-                    </td>
-                </tr>
-              ))   
-            }
-        </tbody>
-    </table>
-  ) 
-  
+  return transactions.length === 0 ? (
+    <Loader type='TailSpin' color='#00BFFF' height={50} width={50} />
+  ) : (
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+        <TableHead>
+          <TableRow>
+            {tableHeaders.map((header) => (
+              <TableCell align='left'>{header}</TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.current
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map(
+              ({
+                hash,
+                nonce,
+                blockHash,
+                blockNumber,
+                transactionIndex,
+                from,
+                to,
+                value,
+                gas,
+                gasPrice,
+              }) => (
+                <TableRow
+                  key={hash}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component='th' scope='row'>
+                    {hash}
+                  </TableCell>
+                  <TableCell align='left'>{nonce}</TableCell>
+                  <TableCell align='left'>{blockHash}</TableCell>
+                  <TableCell align='left'>{blockNumber}</TableCell>
+                  <TableCell align='left'>{transactionIndex}</TableCell>
+                  <TableCell align='left'>{from}</TableCell>
+                  <TableCell align='left'>{to}</TableCell>
+                  <TableCell align='left'>{value}</TableCell>
+                  <TableCell align='left'>{gas}</TableCell>
+                  <TableCell align='left'>{gasPrice}</TableCell>
+                </TableRow>
+              )
+            )}
+          {emptyRows > 0 && (
+            <TableRow style={{ height: 53 * emptyRows }}>
+              <TableCell colSpan={6} />
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 15]}
+        component={'div'}
+        count={transactions.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </TableContainer>
+  );
 };
 
-export default TransactionsContainer;
+export default TransacationsContainer;

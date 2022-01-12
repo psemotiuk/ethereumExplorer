@@ -15,7 +15,6 @@ const BlocksContainer = () => {
 
   const blocks = useBlocks();
 
-  // console.log('blocks', blocks.length);
 
   return (
     <div className='container'>
@@ -26,12 +25,13 @@ const BlocksContainer = () => {
         </div>
       ) : (
         <div className='blocksWrapper'>
-          {blocks.map(({ nonce, parentHash, number, transactions }) => {
+          {blocks.map(({ nonce, parentHash, number, transactions, hash }) => {
             return (
               <Block
+                number={number}
                 nonce={nonce}
                 parentHash={parentHash}
-                number={number}
+                hash={hash}
                 transactions={transactions}
               />
             );

@@ -1,0 +1,24 @@
+.navbarWrapper {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    font-size: 16px;
+    text-decoration: none;
+    color: #6c757e;
+
+    &:hover {
+        color: #1d6fa5;
+    }
+
+    &:active {
+        color: #1d6fa5;
+    }
+  }
+  a.active {
+    color: #1d6fa5;
+  }
+ 
+}
+

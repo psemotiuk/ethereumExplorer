@@ -1,5 +1,9 @@
 $blockWidth: 215px;
 
+a {
+    text-decoration: none;
+}
+
 @mixin blockRows {
     margin-top: 20px;
     background: #C4C4C4;
@@ -30,8 +34,17 @@ $blockWidth: 215px;
             font-size: 1.3rem;
             line-height: 16px;
             text-align: center;
+            text-decoration: none;
     
-            color: #0B1933;
+            // color: #0B1933;
+
+            a {
+                text-decoration: none;
+                color: #3498db;
+            }
+            a:hover {
+                color: #1d6fa5;
+            }
         }
     
         .blockNonce {
@@ -40,25 +53,30 @@ $blockWidth: 215px;
         .prevHash {
             @include blockRows();
         }
+        .hash {
+            @include blockRows();
+        }
         .transactionsRow {
             @include blockRows();
 
-            border-radius: 2px;
-            padding: 2px 6px;
-            border: 2px solid #0B1933;
-            cursor: pointer;
+            // border-radius: 2px;
+            // padding: 2px 6px;
+            // border: 2px solid #0B1933;
+            // cursor: pointer;
+            // text-decoration: none;
 
             &:hover {
-                transition: 0.03s ease-in;
-                background-color: #0B1933;
-                color: #fff;
+                // background-color: #444;
+                color: #1d6fa5;
             }
         }
     }
-
-    :hover {
-        box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
-        transition: all 0.1s ease 0s;
-        border-radius: 10px;
-    }
+    
+    
+    
+    // :hover {
+    //     box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+    //     transition: all 0.1s ease 0s;
+    //     border-radius: 10px;
+    // }
 }

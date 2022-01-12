@@ -11,15 +11,18 @@ export const BlocksProvider = ({ children }) => {
     const lastBlocks = [];
     
     const resolvePromise = async () => {
+        console.time()
         const blocksPromise = await getLastTenBlocks();
-
+        console.timeEnd()
         setLastBlocksState(blocksPromise);
     }
 
     //const lastBlocks = [{nonce: 1, parentHash: 1}, {nonce: 2, parentHash: 2}, {nonce: 3, parentHash: 3}];
 
     useEffect(() => {
+        
         resolvePromise();
+        
     }, [])
 
     

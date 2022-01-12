@@ -1,13 +1,17 @@
 import React from 'react';
+import Navbar from '../Navbar';
 
-import './styles.scss'
+import './styles.scss';
 
 const Header = () => {
-    return (
-        <div className='headerWrapper'>
-            <p className='headerTitle'>Etherum explorer</p>
-        </div>
-    )
-}
+  return (
+    <div className='headerWrapper'>
+      <div className='headerInnerWrapper'>
+        <p className='headerTitle'>Etherium explorer</p>
+        <Navbar />
+      </div>
+    </div>
+  );
+};
 
 export default Header;
