@@ -5,7 +5,10 @@ import {
   useLocation,
   Link,
 } from 'react-router-dom';
-import { getBlockTransactions } from '../../services/web3';
+import {
+  getBlockTransactions,
+  getLastTenTransactions,
+} from '../../services/web3';
 import { useTable } from 'react-table';
 import { COLUMNS } from '../../utils/table';
 
@@ -22,6 +25,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
+import { truncate, convertorWeiToEther } from '../../utlis';
 
 function createData(
   hash,
@@ -76,6 +80,7 @@ const TransacationsContainer = () => {
       const transactionsFetched = await getBlockTransactions(
         transactionsHashes
       );
+      await getLastTenTransactions(transactionsHashes);
       setTransactions(transactionsFetched);
       setIsTransactionsFetched(true);
     } catch (error) {
@@ -87,8 +92,6 @@ const TransacationsContainer = () => {
   useEffect(() => {
     fetchTransactions();
   }, []);
-
-  console.log(transactions[0]);
 
   useEffect(() => {
     if (transactions.length > 0) {
@@ -119,23 +122,19 @@ const TransacationsContainer = () => {
           )
       );
     }
-    console.log('transactions', transactions);
   }, [transactions]);
 
   const tableHeaders = [
     'Hash',
-    'Nonce',
-    'Block hash',
     'Block number',
-    'Transaction index',
     'From',
     'To',
     'Value',
     'Gas',
-    'Gas price',
+    'Gas Price',
   ];
 
-  return transactions.length === 0 ? (
+  return transactions?.length === 0 ? (
     <Loader type='TailSpin' color='#00BFFF' height={50} width={50} />
   ) : (
     <TableContainer component={Paper}>
@@ -168,15 +167,18 @@ const TransacationsContainer = () => {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component='th' scope='row'>
-                    {hash}
+                    <Link to={`/tx/${hash}`}>{truncate(hash, 20, true)}</Link>
                   </TableCell>
-                  <TableCell align='left'>{nonce}</TableCell>
-                  <TableCell align='left'>{blockHash}</TableCell>
-                  <TableCell align='left'>{blockNumber}</TableCell>
-                  <TableCell align='left'>{transactionIndex}</TableCell>
-                  <TableCell align='left'>{from}</TableCell>
-                  <TableCell align='left'>{to}</TableCell>
-                  <TableCell align='left'>{value}</TableCell>
+                  <TableCell align='left'>
+                    <Link to={`/block/${blockNumber}`}>
+                      <p className='blockListItemRowNumber'>{blockNumber}</p>
+                    </Link>
+                  </TableCell>
+                  <TableCell align='left'>{truncate(from, 10, true)}</TableCell>
+                  <TableCell align='left'>{truncate(to, 10, true)}</TableCell>
+                  <TableCell align='left'>
+                    {convertorWeiToEther(value)} Ether{' '}
+                  </TableCell>
                   <TableCell align='left'>{gas}</TableCell>
                   <TableCell align='left'>{gasPrice}</TableCell>
                 </TableRow>

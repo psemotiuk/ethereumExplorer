@@ -12,20 +12,32 @@ import Loader from 'react-loader-spinner';
 
 const BlocksContainer = () => {
   const [blocksState, setBlocksState] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const blocks = useBlocks();
+
+  
+  useEffect(() => {
+    if (blocks?.blocks?.length && blocks?.transactions?.length ) {
+      setIsLoading(false)
+    }
+  }, [blocks])
+
+  // console.log(blocks, transactions);
+
+ 
 
 
   return (
     <div className='container'>
-      {blocks.length === 0 ? (
+      {isLoading ? (
         <div className='loading-box'>
           <Loader type='Puff' color='#00BFFF' height={100} width={100} />
           <p>Processing...</p>
         </div>
       ) : (
         <div className='blocksWrapper'>
-          {blocks.map(({ nonce, parentHash, number, transactions, hash }) => {
+          {blocks.blocks.map(({ nonce, parentHash, number, transactions, hash }) => {
             return (
               <Block
                 number={number}

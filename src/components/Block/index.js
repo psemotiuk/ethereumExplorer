@@ -6,39 +6,9 @@ import './styles.scss';
 import { truncate } from '../../utlis';
 
 const Block = ({ nonce, parentHash, number, transactions, hash }) => {
-  // const blocks = useBlocks();
 
   const parentH = truncate(parentHash, 3);
   const h = truncate(hash, 3);
-
-  // console.log('ph', pH);
-
-  // console.log('transactionKeys', transactions)
-
-  // window.addEventListener('load', function () {
-  //     if (typeof web3 !== undefined) {
-  //         window.web3 = new Web3(window.web3.currentProvider)
-
-  //         if (window.web3.currentProvider.isMetaMask === true) {
-  //             window.web3.eth.getAccounts((error, accounts) => {
-  //                 if (accounts.length == 0) {
-  //                     // there is no active accounts in MetaMask
-  //                 }
-  //                 else {
-  //                     // It's ok
-  //                 }
-  //             });
-  //     }
-  //     else {
-  //         console.log('failed');
-  //     }
-  // } })
-
-  // const blockNumber = getBlockNumber();
-
-  // useEffect( () => {
-  //     console.log('blockNumber', blockNumber);
-  // }, [])
 
   return (
     <div className='blockWrapper'>

@@ -29,8 +29,8 @@ export const getRecentBlockNumber = async () => {
   return recentBlock;
 };
 
-export const getBLock = async (id) => {
-  const block = await web3Instance.eth.getBlock(id);
+export const getBLock = async (number) => {
+  const block = await web3Instance.eth.getBlock(number);
 
   return block;
 };
@@ -40,7 +40,7 @@ export const getLastTenBlocks = async () => {
   const firstOfTen = recentBlock - 10;
   const blockList = [];
 
-  for (let i = firstOfTen; i < recentBlock; i++) {
+  for (let i = recentBlock; i > firstOfTen; i--) {
     blockList.push(await getBLock(i));
   }
 
@@ -55,3 +55,21 @@ export const getTransaction = async (hashNumber) => {
 
 export const getBlockTransactions = async (hashes) =>
   Promise.all(hashes.map(async (hashString) => getTransaction(hashString)));
+
+
+
+
+export const getLastTenTransactions = async (hashes) => {
+  const lastTenBlocks = await getLastTenBlocks();
+  const lastBLock = lastTenBlocks[9];
+  const tranasctionsList = [];
+  const firstOfTen = lastBLock.transactions.length - 10;
+
+  for (let i = firstOfTen; i < lastBLock.transactions.length; i++) {
+    tranasctionsList.push(lastBLock.transactions[i]);
+  }
+
+  const txs = await getBlockTransactions(tranasctionsList);
+
+  return txs;
+}

@@ -1,0 +1,53 @@
+.blocksListItemRow {
+    display: flex;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e7eaf3;;
+    
+
+    .blockListItemRowGeneral {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        min-width: 150px;
+        
+
+        .blockIcon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f3f5f7;
+            border-radius: 6px;
+            user-select: none;
+        }
+        .blockListItemNumberAndTime {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+
+            .blockListItemRowNumber,
+            .blockListItemRowTimestamp {
+                padding: 2px;
+            }
+        }
+    }
+
+    .blockListItemRowDetailed {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.tooltipSize {
+    width: fit-content;
+    font-size: 11px !important;
+    padding: 8px 5px !important;
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+
+}

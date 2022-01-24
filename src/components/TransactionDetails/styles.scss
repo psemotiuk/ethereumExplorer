@@ -1,4 +1,4 @@
-.blockDetailsContainer {
+.transactionDetailsContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,10 +10,7 @@
         width: 80%;
 
         .detailsHeader {
-            width: 100px;
             height: 60px;
-            display: flex;
-            align-items: center;
             h1 {
                 margin-left: 30px;
                 color: #4a4f55;
@@ -36,7 +33,7 @@
             // overflow-y: scroll;
             // overflow: scroll;
 
-            .blockDetailsRow {
+            .transactionDetailsRow {
                 display: flex;
                 // justify-content: center;
                 align-items: center;

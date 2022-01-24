@@ -1,0 +1,64 @@
+.transactionsListContainer {
+    height: fit-content;
+    width: 600px;
+    border-radius: 0.75rem;
+    border: 1px solid #e7eaf3;
+    background-color: #fff;
+    flex-direction: column;
+    
+    transition: 0.3s;
+
+    .transactionsListContainerMain {
+        height: 400px;
+        overflow: hidden;
+
+        &:hover {
+            overflow-y: scroll;
+            transition: all 0.5s ease-out;
+        }
+
+        .centeredContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+    }
+
+    .transactionsListHeaderTitleWrapper {
+        border-bottom: 1px solid #e7eaf3;
+
+        .transactionsListHeaderTitle {
+            padding: 1rem;
+            font-style: normal;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+            color: #4a4f55;
+            font-weight: 600;
+        }
+    }
+}
+
+
+::-webkit-scrollbar {
+    width: 3px;
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: #b4b4b4;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .2) inset;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #4a4f55;
+    border-radius: 8px;
+    border: 3px #b4b4b4;
+    min-height: 40px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #3e4247;
+    border-radius: 8px;
+    border: 3px #b4b4b4;
+}
