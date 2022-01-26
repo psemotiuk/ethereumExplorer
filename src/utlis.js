@@ -4,7 +4,7 @@ import moment from 'moment';
 
 export function truncate(str, n, last = false) {
   const lastIndex = str?.length - 1;
-  return str.length > n ? (
+  return str?.length > n ? (
     last ? (
       <React.Fragment>{str.substr(0, n - 1)}&hellip;</React.Fragment>
     ) : (

@@ -50,7 +50,6 @@ function createData(
 
 const TransacationsContainer = () => {
   const [transactions, setTransactions] = useState([]);
-  const [isTransasctionFetched, setIsTransactionsFetched] = useState(false);
   const location = useLocation();
   const { transactionsHashes } = location.state;
 
@@ -75,9 +74,8 @@ const TransacationsContainer = () => {
       const transactionsFetched = await getBlockTransactions(
         transactionsHashes
       );
-      await getLastTenTransactions(transactionsHashes);
+
       setTransactions(transactionsFetched);
-      setIsTransactionsFetched(true);
     } catch (error) {
       return error;
     }

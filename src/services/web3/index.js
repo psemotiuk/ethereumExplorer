@@ -37,11 +37,14 @@ export const getBlockTransactions = async (hashes) =>
 
 export const getLastTenTransactions = async (hashes) => {
   const lastTenBlocks = await getLastTenBlocks();
-  const lastBLock = lastTenBlocks[9];
+  const lastBLock = lastTenBlocks[0];
   const tranasctionsList = [];
-  const firstOfTen = lastBLock.transactions.length - 10;
+  console.log('lastten', lastTenBlocks);
+  
 
-  for (let i = firstOfTen; i < lastBLock.transactions.length; i++) {
+  const recentTransactionsIndex = lastBLock.transactions.length - 1;
+
+  for (let i = recentTransactionsIndex; i > lastBLock.transactions.length - 10; i--) {
     tranasctionsList.push(lastBLock.transactions[i]);
   }
 
