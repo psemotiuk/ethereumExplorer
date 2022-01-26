@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import BlocksListItem from '../BlocksListItem';
 
-import { useBlocks } from '../../context/BlocksContext';
+import { useCustomHook } from '../../../context/context';
 
 import { Scrollbars } from 'rc-scrollbars';
 
@@ -12,7 +12,7 @@ import Loader from 'react-loader-spinner';
 
 const BlocksListCard = () => {
 
-    const blocks = useBlocks();
+    const blocks = useCustomHook();
     const [isLoading, setIsLoading] = useState(true);
 
   

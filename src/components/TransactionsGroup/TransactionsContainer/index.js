@@ -1,21 +1,16 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import {
-  useParams,
-  useSearchParams,
   useLocation,
   Link,
 } from 'react-router-dom';
 import {
   getBlockTransactions,
   getLastTenTransactions,
-} from '../../services/web3';
-import { useTable } from 'react-table';
-import { COLUMNS } from '../../utils/table';
+} from '../../../services/web3'
+
 
 import Loader from 'react-loader-spinner';
 
-// import './styles.scss';
-import './table.scss';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -25,7 +20,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
-import { truncate, convertorWeiToEther } from '../../utlis';
+import { truncate, convertorWeiToEther } from '../../../utlis';
 
 function createData(
   hash,

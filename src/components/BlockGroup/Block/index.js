@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './styles.scss';
 
-import { truncate } from '../../utlis';
+import { truncate } from '../../../utlis';
 
 const Block = ({ nonce, parentHash, number, transactions, hash }) => {
 

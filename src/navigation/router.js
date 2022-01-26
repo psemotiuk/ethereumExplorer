@@ -3,11 +3,10 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useRouteMatch,
 } from 'react-router-dom';
-import TransactionsContainer from '../components/TransactionsContainer';
-import BlockDetails from '../components/BlockDetails';
-import TransactionDetails from '../components/TransactionDetails';
+import TransactionsContainer from '../components/TransactionsGroup/TransactionsContainer';
+import BlockDetails from '../components/BlockGroup/BlockDetails';
+import TransactionDetails from '../components/TransactionsGroup/TransactionDetails';
 import Home from '../pages/Home/Home';
 import Blocks from '../pages/Blocks';
 import Header from '../components/Header';
@@ -15,7 +14,6 @@ import Header from '../components/Header';
 import '../App.css';
 
 const AppRouter = () => {
-  // let { path, url } = useRouteMatch();
   return (
     <Router>
       <Header />

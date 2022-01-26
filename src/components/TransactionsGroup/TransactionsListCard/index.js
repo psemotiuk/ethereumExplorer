@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import TransactionsListItem from '../TransactionsListItem';
-import { useBlocks } from '../../context/BlocksContext';
+import { useCustomHook } from '../../../context/context';
 
 import Loader from 'react-loader-spinner';
 
@@ -8,7 +8,7 @@ import './styles.scss'
 
 const TransactionsListCard = () => {
 
-    const blocks = useBlocks();
+    const blocks = useCustomHook();
     const [isLoading, setIsLoading] = useState(true);
 
   

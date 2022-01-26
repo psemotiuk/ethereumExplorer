@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { timeSince, truncate } from '../../utlis';
+import { timeSince, truncate } from '../../../utlis';
 import ReactTooltip from 'react-tooltip';
 
 import './styles.scss';

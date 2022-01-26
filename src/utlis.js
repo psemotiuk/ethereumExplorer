@@ -25,8 +25,6 @@ export const convertorWeiToEther = (sum, toIndex = 7) => {
 export const timeSince = (blockTimestamp) => {
   const diffSeconds = Math.floor((new Date().getTime() - blockTimestamp*1000) / 1000);
 
-  console.log('difSec', diffSeconds)
-
   return diffSeconds < 60 ? `${diffSeconds} seconds ago` : moment(blockTimestamp*1000).fromNow();
 }
 

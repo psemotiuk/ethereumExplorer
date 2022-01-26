@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getBLock } from '../../services/web3';
-import { timeSince } from '../../utlis';
+import { getBLock } from '../../../services/web3';
+import { timeSince } from '../../../utlis';
 import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 

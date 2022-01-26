@@ -2,9 +2,9 @@ import React from 'react';
 
 import './styles.scss';
 
-import { truncate } from '../../utlis';
+import { truncate } from '../../../utlis';
 import { Link } from 'react-router-dom';
-import { convertorWeiToEther } from '../../utlis';
+import { convertorWeiToEther } from '../../../utlis';
 import ReactTooltip from 'react-tooltip';
 
 const TransactionsListItem = ({ data: { hash, from, to, value } }) => {

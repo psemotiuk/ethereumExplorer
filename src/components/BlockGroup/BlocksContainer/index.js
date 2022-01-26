@@ -4,17 +4,16 @@ import Block from '../Block';
 
 import './styles.scss';
 
-import { getLastTenBlocks } from '../../services/web3';
+import { getLastTenBlocks } from '../../../services/web3';
 
-import { useBlocks } from '../../context/BlocksContext';
+import { useCustomHook } from '../../../context/context';
 
 import Loader from 'react-loader-spinner';
 
 const BlocksContainer = () => {
-  const [blocksState, setBlocksState] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const blocks = useBlocks();
+  const blocks = useCustomHook();
 
   
   useEffect(() => {
@@ -22,9 +21,6 @@ const BlocksContainer = () => {
       setIsLoading(false)
     }
   }, [blocks])
-
-  // console.log(blocks, transactions);
-
  
 
 

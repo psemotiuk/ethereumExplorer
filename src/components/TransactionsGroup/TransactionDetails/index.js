@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getTransaction } from '../../services/web3';
-import { convertorWeiToEther } from '../../utlis';
+import { getTransaction } from '../../../services/web3';
+import { convertorWeiToEther } from '../../../utlis';
 import { Link } from 'react-router-dom';
 
 import './styles.scss';
