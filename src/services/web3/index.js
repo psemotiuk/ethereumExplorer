@@ -2,8 +2,8 @@ import Web3 from 'web3';
 
 // const web3 = new Web3('ws://localhost:8546');
 
-export const web3Instance = new Web3(window.web3.currentProvider);
-console.log('eth', window.web3.currentProvider);
+export const web3Instance = new Web3(window?.web3?.currentProvider || new Web3.providers.HttpProvider('http://localhost:8545'));
+// console.log('eth', window.web3.currentProvider);
 
 // export const getBlockNumber = async () => {
 //     const recentBlockNumber = await web3.eth.getBlockNumber();
