@@ -70,11 +70,11 @@ const BlockDetails = () => {
           </div>
           <div className='blockDetailsRow'>
             <div className='column first'>Difficulty</div>
-            <div className='column second'>{block.difficulty}</div>
+            <div className='column second'>{block.difficulty} <span className='small text-secondary'>Integer of the difficulty for this block</span></div>
           </div>
           <div className='blockDetailsRow'>
-            <div className='column first'>Totla Difficulty</div>
-            <div className='column second'>{block.totalDifficulty}</div>
+            <div className='column first'>Total Difficulty</div>
+            <div className='column second'>{block.totalDifficulty} <span className='small text-secondary'>Integer of the total difficulty of the chain until this block</span></div>
           </div>
           <div className='blockDetailsRow'>
             <div className='column first'>Size</div>
@@ -91,8 +91,8 @@ const BlockDetails = () => {
               </span></div>
           </div>
           <div className='blockDetailsRow'>
-            <div className='column first'>Gas Limit</div>
-            <div className='column second'>{block.gasLimit} <span className='small secondary'>Number of max gas pay to miner</span></div>
+            <div className='column first'>Gas Limit <span className='small text-secondary'>Calc as gas limit * gas price = maximum fee for block</span></div>
+            <div className='column second'>{block.gasLimit} wei <span className='small text-secondary'>Number of max gas pay to miner</span></div>
           </div>
           <div className='blockDetailsRow'>
             <div className='column first'>Block Height:</div>

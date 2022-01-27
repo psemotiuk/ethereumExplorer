@@ -15,7 +15,7 @@ const BlocksListItem = ({
             <span>Bk</span>
           </span>
           <div className='blockListItemNumberAndTime'>
-            <Link to={`/block/${number}`}>
+            <Link to={`/blocks/${number}`}>
               <p className='blockListItemRowNumber'>{number}</p>
             </Link>
 

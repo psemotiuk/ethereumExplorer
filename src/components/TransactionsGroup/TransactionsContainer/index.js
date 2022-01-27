@@ -20,7 +20,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
-import { truncate, convertorWeiToEther } from '../../../utlis';
+import {truncate, convertorWeiToEther, fetchCurrencyPrice} from '../../../utlis';
 
 function createData(
   hash,
@@ -52,6 +52,7 @@ const TransacationsContainer = () => {
   const [transactions, setTransactions] = useState([]);
   const location = useLocation();
   const [isTransasctionFetched, setIsTransactionsFetched] = useState(false);
+  const [currencyPrice, setCurrencyPrice] = useState({});
   const { transactionsHashes } = location.state;
 
   const [page, setPage] = useState(0);
@@ -86,6 +87,9 @@ const TransacationsContainer = () => {
   let rows = useRef([]);
   useEffect(() => {
     fetchTransactions();
+    fetchCurrencyPrice().then((result) => {
+      setCurrencyPrice(result);
+    });
   }, []);
 
   useEffect(() => {
@@ -174,8 +178,11 @@ const TransacationsContainer = () => {
                   <TableCell align='left'>
                     {convertorWeiToEther(value)} Ether{' '}
                   </TableCell>
-                  <TableCell align='left'>{gas}</TableCell>
-                  <TableCell align='left'>{gasPrice}</TableCell>
+                  <TableCell align='left'>{gas} wei  (${currencyPrice.USD *
+                      convertorWeiToEther(gasPrice * gas)} Burnt fee)
+                    </TableCell>
+                  <TableCell align='left'>{gasPrice} wei (${currencyPrice.USD *
+                      convertorWeiToEther(gasPrice)})</TableCell>
                 </TableRow>
               )
             )}

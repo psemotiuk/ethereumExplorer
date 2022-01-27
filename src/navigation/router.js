@@ -22,7 +22,7 @@ const AppRouter = () => {
         <Route path='/' element={<Home />} />
         <Route path='/blocks' element={<Blocks />} />
         <Route path='/txs' element={<TransactionsContainer />} />
-        <Route path='/block/:number' element={<BlockDetails />} />
+        <Route path='/blocks/:number' element={<BlockDetails />} />
         <Route path='/tx/:hash' exact element={<TransactionDetails />} />
       </Routes>
       </div>

@@ -23,10 +23,6 @@ const TransactionDetails = () => {
     });
   }, []);
 
-  useEffect(() => {
-    console.log('currency price', currencyPrice);
-  }, [currencyPrice]);
-
   return (
     <div className='transactionDetailsContainer'>
       <div className='detailsInnerContainer'>
