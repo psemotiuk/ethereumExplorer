@@ -51,6 +51,7 @@ function createData(
 const TransacationsContainer = () => {
   const [transactions, setTransactions] = useState([]);
   const location = useLocation();
+  const [isTransasctionFetched, setIsTransactionsFetched] = useState(false);
   const { transactionsHashes } = location.state;
 
   const [page, setPage] = useState(0);
@@ -72,10 +73,11 @@ const TransacationsContainer = () => {
   const fetchTransactions = async () => {
     try {
       const transactionsFetched = await getBlockTransactions(
-        transactionsHashes
+        transactionsHashes.reverse()
       );
-
+      // await getLastTenTransactions(transactionsHashes);
       setTransactions(transactionsFetched);
+      setIsTransactionsFetched(true);
     } catch (error) {
       return error;
     }

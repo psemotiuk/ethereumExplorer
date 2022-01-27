@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBLock } from '../../../services/web3';
-import { timeSince } from '../../../utlis';
+import { timeSince, fetchCurrencyPrice } from '../../../utlis';
 import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
@@ -11,6 +11,8 @@ const BlockDetails = () => {
   const [block, setBlock] = useState({});
   const params = useParams();
   const { number } = params;
+  const [currencyPrice, setCurrencyPrice] = useState({});
+  const gasPrice = 0.000000123022258762;
 
   const fetchBlock = async () => {
     const blockData = await getBLock(number);
@@ -19,10 +21,10 @@ const BlockDetails = () => {
 
   useEffect(() => {
     fetchBlock();
+    fetchCurrencyPrice().then((result) => {
+      setCurrencyPrice(result);
+    });
   }, []);
-  useEffect(() => {
-    console.log('blockData', block);
-  }, [block]);
 
   return (
     <div className='blockDetailsContainer'>
@@ -80,11 +82,17 @@ const BlockDetails = () => {
           </div>
           <div className='blockDetailsRow'>
             <div className='column first'>Gas Used</div>
-            <div className='column second'>{block.gasUsed}</div>
+            <div className='column second'>{block.gasUsed}  <span className='price'>
+                {' '}
+                (${' '}
+                {currencyPrice.USD *
+                  (gasPrice * block.gasUsed)}
+                )
+              </span></div>
           </div>
           <div className='blockDetailsRow'>
             <div className='column first'>Gas Limit</div>
-            <div className='column second'>{block.gasLimit}</div>
+            <div className='column second'>{block.gasLimit} <span className='small secondary'>Number of max gas pay to miner</span></div>
           </div>
           <div className='blockDetailsRow'>
             <div className='column first'>Block Height:</div>

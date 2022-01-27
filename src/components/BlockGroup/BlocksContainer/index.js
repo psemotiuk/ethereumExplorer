@@ -17,7 +17,7 @@ const BlocksContainer = () => {
 
   
   useEffect(() => {
-    if (blocks?.blocks?.length && blocks?.transactions?.length ) {
+    if (blocks?.blocks?.length) {
       setIsLoading(false)
     }
   }, [blocks])

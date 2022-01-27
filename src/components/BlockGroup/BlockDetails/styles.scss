@@ -50,6 +50,12 @@
                 .column {
                     text-align: start;
                     margin-left: 10px;
+
+                    .price {
+                        color: green;
+                        font-weight: 500;
+                        font-size: 15px;
+                    }
                 }
 
                 .first {

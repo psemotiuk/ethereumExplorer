@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getTransaction } from '../../../services/web3';
-import { convertorWeiToEther } from '../../../utlis';
+import { convertorWeiToEther, fetchCurrencyPrice } from '../../../utlis';
 import { Link } from 'react-router-dom';
 
 import './styles.scss';
@@ -10,6 +10,7 @@ const TransactionDetails = () => {
   const params = useParams();
   const [transaction, setTransaction] = useState({});
   const { hash } = params;
+  const [currencyPrice, setCurrencyPrice] = useState({});
 
   const fetchTransaction = async () => {
     const transactionsData = await getTransaction(hash);
@@ -17,7 +18,14 @@ const TransactionDetails = () => {
   };
   useEffect(() => {
     fetchTransaction();
+    fetchCurrencyPrice().then((result) => {
+      setCurrencyPrice(result);
+    });
   }, []);
+
+  useEffect(() => {
+    console.log('currency price', currencyPrice);
+  }, [currencyPrice]);
 
   return (
     <div className='transactionDetailsContainer'>
@@ -59,8 +67,35 @@ const TransactionDetails = () => {
             <div className='column second'>{transaction.gas}</div>
           </div>
           <div className='transactionDetailsRow'>
+            <div className='column first'>Transaction Fee:</div>
+            <div className='column second'>
+              {convertorWeiToEther(transaction.gasPrice, 10) * transaction.gas}{' '}
+              Ether
+              <span className='price'>
+                {' '}
+                (${' '}
+                {currencyPrice.USD *
+                  convertorWeiToEther(transaction.gasPrice * transaction.gas)}
+                )
+              </span>
+              {' '}
+              <span className='small secondary'>
+                Calc as gas used * gas price
+              </span>
+            </div>
+          </div>
+          <div className='transactionDetailsRow'>
             <div className='column first'>Gas Price</div>
-            <div className='column second'>{transaction.gasPrice}</div>
+            <div className='column second'>
+              {convertorWeiToEther(transaction.gasPrice, 10)} Ether{' '}
+              <span className='price'>
+                {' '}
+                (${' '}
+                {currencyPrice.USD *
+                  convertorWeiToEther(transaction.gasPrice, 10)}
+              </span>
+              )
+            </div>
           </div>
         </section>
       </div>

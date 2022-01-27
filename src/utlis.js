@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 import moment from 'moment';
 
 export function truncate(str, n, last = false) {
@@ -19,12 +19,24 @@ export function truncate(str, n, last = false) {
 
 export const convertorWeiToEther = (sum, toIndex = 7) => {
   const parsedToEther = sum / 1000000000000000000;
-  return parsedToEther % 1 === 0 ? parsedToEther.toFixed(0) : parsedToEther.toFixed(toIndex);
-}
+  return parsedToEther % 1 === 0
+    ? parsedToEther.toFixed(0)
+    : parsedToEther.toFixed(toIndex);
+};
 
 export const timeSince = (blockTimestamp) => {
-  const diffSeconds = Math.floor((new Date().getTime() - blockTimestamp*1000) / 1000);
+  const diffSeconds = Math.floor(
+    (new Date().getTime() - blockTimestamp * 1000) / 1000
+  );
 
-  return diffSeconds < 60 ? `${diffSeconds} seconds ago` : moment(blockTimestamp*1000).fromNow();
-}
+  return diffSeconds < 60
+    ? `${diffSeconds} seconds ago`
+    : moment(blockTimestamp * 1000).fromNow();
+};
+
+export const fetchCurrencyPrice = () => fetch(
+  'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR'
+).then(res => res.json())
+.then(resuslt => resuslt)
+
 
