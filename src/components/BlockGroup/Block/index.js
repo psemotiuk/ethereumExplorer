@@ -15,7 +15,7 @@ const Block = ({ nonce, parentHash, number, transactions, hash }) => {
       <div className='innerWrapper'>
         <div className='blockTitle'>
           Block
-          <Link to={`/block/${number}`}>
+          <Link to={`/blocks/${number}`}>
             <span>{number}</span>
           </Link>
         </div>

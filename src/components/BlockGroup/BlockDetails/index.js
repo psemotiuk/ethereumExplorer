@@ -6,9 +6,13 @@ import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
 import './styles.scss';
+import FollowButton from "./FollowButton/indexs";
 
 const BlockDetails = () => {
   const [block, setBlock] = useState({});
+  const followedList = JSON.parse(localStorage.getItem('followed'));
+  console.log('followedListLocal', followedList)
+  const [followedListState, setFollowedListState] = useState(followedList || []);
   const params = useParams();
   const { number } = params;
   const [currencyPrice, setCurrencyPrice] = useState({});
@@ -26,6 +30,11 @@ const BlockDetails = () => {
     });
   }, []);
 
+  const followBlock = (block) => {
+    setFollowedListState((prevState => [...prevState, block]))
+    localStorage.setItem('followed', JSON.stringify(followedListState))
+  }
+
   return (
     <div className='blockDetailsContainer'>
       <div className='detailsInnerContainer'>
@@ -34,6 +43,7 @@ const BlockDetails = () => {
             Block&nbsp;
             <span className='textSecondary small'>&nbsp;#{number} </span>
           </h1>
+          <FollowButton action={() => followBlock(block)}/>
         </section>
         <section className='card'>
           <div className='blockDetailsRow'>

@@ -1,0 +1,15 @@
+.favouriteLink__container {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+
+  .favouriteLink__title {
+    margin-right: 5px;
+  }
+
+  .favouriteLink__iconContainer {
+    width: 35px;
+  }
+}

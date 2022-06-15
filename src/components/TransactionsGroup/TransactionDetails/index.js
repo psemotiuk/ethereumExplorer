@@ -5,6 +5,7 @@ import { convertorWeiToEther, fetchCurrencyPrice } from '../../../utlis';
 import { Link } from 'react-router-dom';
 
 import './styles.scss';
+import FollowButton from "./FollowButton/indexs";
 
 const TransactionDetails = () => {
   const params = useParams();
@@ -28,6 +29,7 @@ const TransactionDetails = () => {
       <div className='detailsInnerContainer'>
         <section className='detailsHeader'>
           <h1>Transaction Details</h1>
+          <FollowButton />
         </section>
         <section className='card'>
           <div className='transactionDetailsRow'>

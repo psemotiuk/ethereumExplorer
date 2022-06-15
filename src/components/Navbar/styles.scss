@@ -1,7 +1,8 @@
 .navbarWrapper {
-  width: 170px;
+  width: 320px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   a {
     font-size: 16px;
@@ -19,6 +20,13 @@
   a.active {
     color: #1d6fa5;
   }
- 
+  svg {
+    width: 20px;
+    height: 20px;
+
+    g {
+      fill: rebeccapurple;
+    }
+  }
 }
 
