@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
+    BrowserRouter as Router,
+    Route,
+    Routes,
 } from 'react-router-dom';
 import TransactionsContainer from '../components/TransactionsGroup/TransactionsContainer';
 import BlockDetails from '../components/BlockGroup/BlockDetails';
@@ -13,23 +13,28 @@ import Header from '../components/Header';
 
 import '../App.css';
 import Favourites from "../pages/Favourites";
+import FavouritesContext from "../context/favouritesContext";
 
 const AppRouter = () => {
-  return (
-    <Router>
-      <Header />
-      <div className="appContainer">
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/blocks' element={<Blocks />} />
-        <Route path='/txs' element={<TransactionsContainer />} />
-        <Route path='/blocks/:number' element={<BlockDetails />} />
-        <Route path='/tx/:hash' exact element={<TransactionDetails />} />
-        <Route path='/favourites' element={<Favourites />}/>
-      </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <FavouritesContext>
+            <Router>
+                <Header/>
+                <div className="appContainer">
+                    <Routes>
+                        <Route path='/' element={<Home/>}/>
+                        <Route path='/blocks' element={<Blocks/>}/>
+                        <Route path='/txs' element={<TransactionsContainer/>}/>
+
+                        <Route path='/blocks/:number' element={<BlockDetails/>}/>
+                        <Route path='/tx/:hash' exact element={<TransactionDetails/>}/>
+                        <Route path='/favourites' element={<Favourites/>}/>
+                    </Routes>
+                </div>
+            </Router>
+        </FavouritesContext>
+
+    );
 };
 
 export default AppRouter;

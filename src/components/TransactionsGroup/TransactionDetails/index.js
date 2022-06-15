@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { getTransaction } from '../../../services/web3';
 import { convertorWeiToEther, fetchCurrencyPrice } from '../../../utlis';
 import { Link } from 'react-router-dom';
 
 import './styles.scss';
-import FollowButton from "./FollowButton/indexs";
+import FollowButton from "./FollowButton";
+import {FavouritesContextProvider} from "../../../context/favouritesContext";
 
 const TransactionDetails = () => {
+  const followedList = JSON.parse(localStorage.getItem('followed'));
+  console.log('followedListLocal', followedList)
+  const [followedListState, setFollowedListState] = useState(followedList || []);
   const params = useParams();
+  const {incrementFavouritesLength} = useContext(FavouritesContextProvider)
   const [transaction, setTransaction] = useState({});
   const { hash } = params;
   const [currencyPrice, setCurrencyPrice] = useState({});
@@ -24,12 +29,18 @@ const TransactionDetails = () => {
     });
   }, []);
 
+  const followTransaction = (transaction) => {
+    setFollowedListState((prevState => [...prevState, transaction]))
+    incrementFavouritesLength();
+    localStorage.setItem('followed', JSON.stringify([...followedListState, transaction]))
+  }
+
   return (
     <div className='transactionDetailsContainer'>
       <div className='detailsInnerContainer'>
         <section className='detailsHeader'>
           <h1>Transaction Details</h1>
-          <FollowButton />
+          <FollowButton action={() => followTransaction(transaction)}/>
         </section>
         <section className='card'>
           <div className='transactionDetailsRow'>

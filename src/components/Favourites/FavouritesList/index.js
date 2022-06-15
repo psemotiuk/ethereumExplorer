@@ -1,20 +1,28 @@
 import React from 'react';
 import BlocksListItem from "../../BlockGroup/BlocksListItem";
+import TransactionsListItem from "../../TransactionsGroup/TransactionsListItem";
+import './index.scss';
 
 const FavouritesList = () => {
-    const data = {number: 1, timestamp: '32132', miner: '32132', transactions: []};
-    const followedList = JSON.parse(localStorage.getItem('followed'));
-    return (
-        <div>
-            {
-                followedList &&
-                followedList.map(item => (
-                    <BlocksListItem data={item}/>
-                ))
-            }
+        const followedList = JSON.parse(localStorage.getItem('followed'));
+        return (
+            <div className={'followedList__container'}>
+                {
+                    followedList &&
+                    followedList.map(item => {
+                            if (item.transactions) {
+                                return <BlocksListItem data={item} isFavouritesPage />
+                            } else {
+                                return <TransactionsListItem data={item} isFavouritesPage />
+                            }
+                        }
+                    )
+                }
 
-        </div>
-    );
-};
+            </div>
+        )
+            ;
+    }
+;
 
 export default FavouritesList;

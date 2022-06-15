@@ -2,9 +2,9 @@ import React from 'react';
 
 const FavouritesHeader = () => {
     return (
-        <h3>
+        <h2>
             Followed list
-        </h3>
+        </h2>
     );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { getBLock } from '../../../services/web3';
 import { timeSince, fetchCurrencyPrice } from '../../../utlis';
@@ -6,13 +6,15 @@ import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
 import './styles.scss';
-import FollowButton from "./FollowButton/indexs";
+import FollowButton from "./FollowButton";
+import {FavouritesContextProvider} from "../../../context/favouritesContext";
 
 const BlockDetails = () => {
   const [block, setBlock] = useState({});
   const followedList = JSON.parse(localStorage.getItem('followed'));
   console.log('followedListLocal', followedList)
   const [followedListState, setFollowedListState] = useState(followedList || []);
+  const {incrementFavouritesLength} = useContext(FavouritesContextProvider)
   const params = useParams();
   const { number } = params;
   const [currencyPrice, setCurrencyPrice] = useState({});
@@ -31,8 +33,10 @@ const BlockDetails = () => {
   }, []);
 
   const followBlock = (block) => {
+    console.log('block', block)
     setFollowedListState((prevState => [...prevState, block]))
-    localStorage.setItem('followed', JSON.stringify(followedListState))
+    incrementFavouritesLength();
+    localStorage.setItem('followed', JSON.stringify([...followedListState, block]))
   }
 
   return (
