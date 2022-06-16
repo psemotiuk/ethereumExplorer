@@ -1,19 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './index.scss';
-import {Radio, RadioGroup} from "@mui/material";
 import FavouritesHeader from "../../components/Favourites/FavouritesHeader";
 import FavouritesList from "../../components/Favourites/FavouritesList";
-import {useLocation, useParams} from "react-router-dom";
+import FavouritesFilter from "../../components/Favourites/FavouritesFilter/FavouritesFilter";
 
 const Favourites = () => {
-    const location = useLocation();
-    console.log('location', location)
+    const followedListFromStorageLength = JSON.parse(localStorage.getItem('followed'))?.length;
+    const [filters, setFilters] = useState({
+        transactions: true,
+        blocks: true
+    })
+
     return (
         <>
             <FavouritesHeader/>
-            <FavouritesList />
+            {followedListFromStorageLength > 0 && <FavouritesFilter filters={filters} setFilters={setFilters}/>}
+            <FavouritesList filters={filters}/>
         </>
     );
-};
+}
+;
 
 export default Favourites;

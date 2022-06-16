@@ -1,0 +1,104 @@
+// @import url('../Block/styles.scss');
+$blockWidth: 215px;
+$borderWidth: 1px * 2 * 3;
+
+@mixin blockRows {
+  margin-top: 20px;
+  background: #C4C4C4;
+  border-radius: 8px;
+  padding: 0px 4px;
+  font-size: 1rem;
+  text-align: center;
+  overflow: hidden;
+  // text-overflow: ellipsis;
+}
+.containerGraph {
+  width: 1040px;
+  margin: 0 auto;
+  background: #C4C4C4;
+  border-radius: 32px;
+  min-height: 824px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .blocksWrapperGraph {
+    width: calc(300px * 3 + 60px + 6px);
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+  }
+
+  .blockWrapperGraph {
+    margin: 50px;
+    min-width: $blockWidth;
+    max-width: $blockWidth;
+    height: fit-content;
+    background: #FDF9F9;
+    border-radius: 10px;
+    border: 1px solid rgb(229, 232, 235);
+
+    .innerWrapperGraph {
+      padding: 8px;
+
+
+      .blockTitleGraph {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.3rem;
+        line-height: 16px;
+        text-align: center;
+        text-decoration: none;
+
+        // color: #0B1933;
+
+        a {
+          text-decoration: none;
+          color: #3498db;
+        }
+        a:hover {
+          color: #1d6fa5;
+        }
+      }
+
+      .blockNonceGraph {
+        @include blockRows();
+      }
+      .prevHashGraph {
+        @include blockRows();
+      }
+      .hashGraph {
+        @include blockRows();
+      }
+      .transactionsRowGraph {
+        @include blockRows();
+
+        // border-radius: 2px;
+        // padding: 2px 6px;
+        // border: 2px solid #0B1933;
+        // cursor: pointer;
+        // text-decoration: none;
+
+        &:hover {
+          // background-color: #444;
+          color: #1d6fa5;
+        }
+      }
+    }
+  }
+
+  .loading-box {
+    width: 300px;
+    height: 300px;
+    border-radius: 4px;
+    border: 1px solid #00BFFF;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+

@@ -14,6 +14,7 @@ import Header from '../components/Header';
 import '../App.css';
 import Favourites from "../pages/Favourites";
 import FavouritesContext from "../context/favouritesContext";
+import PrevBlocks from "../pages/PrevBlocks/PrevBlocks";
 
 const AppRouter = () => {
     return (
@@ -29,6 +30,7 @@ const AppRouter = () => {
                         <Route path='/blocks/:number' element={<BlockDetails/>}/>
                         <Route path='/tx/:hash' exact element={<TransactionDetails/>}/>
                         <Route path='/favourites' element={<Favourites/>}/>
+                        <Route path='/prevBlocks/:number' element={<PrevBlocks/>}/>
                     </Routes>
                 </div>
             </Router>

@@ -14,8 +14,8 @@ export const getBLock = async (number) => {
   return block;
 };
 
-export const getLastTenBlocks = async () => {
-  const recentBlock = await getRecentBlockNumber();
+export const getLastTenBlocks = async (blockNumber) => {
+  const recentBlock = blockNumber || await getRecentBlockNumber();
   const firstOfTen = recentBlock - 10;
   const blockList = [];
 

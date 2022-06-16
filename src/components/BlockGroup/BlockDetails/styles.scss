@@ -28,8 +28,16 @@
                     line-height: 40px;
                  }
             }
-             
 
+            .blockDetails__actionButtons {
+                display: flex;
+                width: 250px;
+                justify-content: space-between;
+
+                .blockDetails__prev10blocksButton {
+                    background-color: #0B1933;
+                }
+            }
         }
         .card {
             background-color: #fff;

@@ -8,6 +8,7 @@ import ReactTooltip from 'react-tooltip';
 import './styles.scss';
 import FollowButton from "./FollowButton";
 import {FavouritesContextProvider} from "../../../context/favouritesContext";
+import PrevTenBLocksButton from "./PrevTenBlocksButton/PrevTenBlocksButton";
 
 const BlockDetails = () => {
   const [block, setBlock] = useState({});
@@ -39,6 +40,10 @@ const BlockDetails = () => {
     localStorage.setItem('followed', JSON.stringify([...followedListState, block]))
   }
 
+  const openPrevBlocks = () => {
+
+  }
+
   return (
     <div className='blockDetailsContainer'>
       <div className='detailsInnerContainer'>
@@ -47,7 +52,14 @@ const BlockDetails = () => {
             Block&nbsp;
             <span className='textSecondary small'>&nbsp;#{number} </span>
           </h1>
-          <FollowButton action={() => followBlock(block)}/>
+          <div className={'blockDetails__actionButtons'}>
+            <Link to={`/prevBlocks/${number}`}>
+              <PrevTenBLocksButton classname={'blockDetails__prev10blocksButton'} action={openPrevBlocks}/>
+            </Link>
+
+            <FollowButton action={() => followBlock(block)}/>
+          </div>
+
         </section>
         <section className='card'>
           <div className='blockDetailsRow'>

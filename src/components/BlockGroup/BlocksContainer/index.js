@@ -11,17 +11,26 @@ import { useCustomHook } from '../../../context/context';
 import Loader from 'react-loader-spinner';
 
 const BlocksContainer = () => {
+  const [blocks, setBlocks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const blocks = useCustomHook();
+  //const blocks = useCustomHook();
 
-  
-  useEffect(() => {
-    if (blocks?.blocks?.length) {
+  const fetchRecentTenBlocks = async () => {
+    try {
+      setIsLoading(true);
+      const fetchedBlock = await getLastTenBlocks();
+      setBlocks(fetchedBlock)
+    } catch (e) {
+      throw e
+    } finally {
       setIsLoading(false)
     }
-  }, [blocks])
- 
+  }
+
+  useEffect(() => {
+    fetchRecentTenBlocks()
+  }, [])
 
 
   return (
@@ -33,7 +42,7 @@ const BlocksContainer = () => {
         </div>
       ) : (
         <div className='blocksWrapper'>
-          {blocks.blocks.map(({ nonce, parentHash, number, transactions, hash }) => {
+          {blocks.map(({ nonce, parentHash, number, transactions, hash }) => {
             return (
               <Block
                 number={number}

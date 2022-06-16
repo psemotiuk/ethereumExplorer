@@ -10,6 +10,13 @@ const BlocksListItem = ({
                             data: {number, timestamp, miner, transactions},
                             isFavouritesPage = false
                         }) => {
+    const followedListFromStorage = JSON.parse(localStorage.getItem('followed'));
+    const onRemoveClick = (e) => {
+        console.log('followedListFromStorage', followedListFromStorage)
+        e.preventDefault()
+        const filteredFollowedList = followedListFromStorage.filter(item => !item.number === number)
+        localStorage.setItem('followed', JSON.stringify(filteredFollowedList))
+    }
     return (
         <Link to={`/blocks/${number}`}>
             <div className='blocksListItemRow'>
@@ -50,7 +57,13 @@ const BlocksListItem = ({
                 </div>
                 {isFavouritesPage &&
                 <div className={'removeBlockButton__container'}>
-                    <Button className={'removeBlockButton'} variant="contained">Remove</Button>
+                    <Button
+                        onClick={onRemoveClick}
+                        className={'removeBlockButton'}
+                        variant="contained"
+                    >
+                        Remove
+                    </Button>
                 </div>
                 }
             </div>
