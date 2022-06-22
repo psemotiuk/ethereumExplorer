@@ -8,7 +8,14 @@ import {convertorWeiToEther} from '../../../utlis';
 import ReactTooltip from 'react-tooltip';
 import {Button} from "@mui/material";
 
-const TransactionsListItem = ({data: {hash, from, to, value}, isFavouritesPage = false}) => {
+const TransactionsListItem = ({data: {hash, from, to, value}, isFavouritesPage = false, setIdToRemove}) => {
+    const followedListFromStorage = JSON.parse(localStorage.getItem('followed'));
+    const onRemoveClick = (e) => {
+        e.preventDefault()
+        const filteredFollowedList = followedListFromStorage.filter(item => !item.hash === hash)
+        localStorage.setItem('followed', JSON.stringify(filteredFollowedList))
+        setIdToRemove(hash)
+    }
     return (
         <Link to={`/tx/${hash}`}>
             <div className='transactionListItemRow'>
@@ -44,7 +51,8 @@ const TransactionsListItem = ({data: {hash, from, to, value}, isFavouritesPage =
                 }
                 {isFavouritesPage &&
                 <div className={'removeTransactionButton__container'}>
-                    <Button className={'removeTransactionButton'} variant="contained">Remove</Button>
+                    <Button
+                        className={'removeTransactionButton'} onClick={onRemoveClick} variant="contained">Remove</Button>
                 </div>
                 }
             </div>

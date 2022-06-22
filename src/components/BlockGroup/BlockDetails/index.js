@@ -40,10 +40,6 @@ const BlockDetails = () => {
     localStorage.setItem('followed', JSON.stringify([...followedListState, block]))
   }
 
-  const openPrevBlocks = () => {
-
-  }
-
   return (
     <div className='blockDetailsContainer'>
       <div className='detailsInnerContainer'>
@@ -54,7 +50,7 @@ const BlockDetails = () => {
           </h1>
           <div className={'blockDetails__actionButtons'}>
             <Link to={`/prevBlocks/${number}`}>
-              <PrevTenBLocksButton classname={'blockDetails__prev10blocksButton'} action={openPrevBlocks}/>
+              <PrevTenBLocksButton classname={'blockDetails__prev10blocksButton'} />
             </Link>
 
             <FollowButton action={() => followBlock(block)}/>

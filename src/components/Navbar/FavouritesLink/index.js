@@ -9,9 +9,6 @@ const FavouritesLink = () => {
     const favoritesLength = JSON.parse(localStorage.getItem('followed'))?.length
     const {favouritesLengthState, incrementFavouritesLength} = useContext(FavouritesContextProvider)
 
-    useEffect(() => {
-        console.log('favouritesLengthState', favouritesLengthState)
-    }, [favouritesLengthState])
     return (
         <NavLink to={'/favourites'} className={'favouriteLink__container'}>
             <p className={'favouriteLink__title'}>My list</p>

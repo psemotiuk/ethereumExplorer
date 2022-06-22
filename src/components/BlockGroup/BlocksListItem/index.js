@@ -8,7 +8,8 @@ import {Button} from "@mui/material";
 
 const BlocksListItem = ({
                             data: {number, timestamp, miner, transactions},
-                            isFavouritesPage = false
+                            isFavouritesPage = false,
+                            setIdToRemove
                         }) => {
     const followedListFromStorage = JSON.parse(localStorage.getItem('followed'));
     const onRemoveClick = (e) => {
@@ -16,6 +17,7 @@ const BlocksListItem = ({
         e.preventDefault()
         const filteredFollowedList = followedListFromStorage.filter(item => !item.number === number)
         localStorage.setItem('followed', JSON.stringify(filteredFollowedList))
+        setIdToRemove(number)
     }
     return (
         <Link to={`/blocks/${number}`}>

@@ -14,7 +14,7 @@ const Favourites = () => {
     return (
         <>
             <FavouritesHeader/>
-            {followedListFromStorageLength > 0 && <FavouritesFilter filters={filters} setFilters={setFilters}/>}
+            <FavouritesFilter filters={filters} setFilters={setFilters}/>
             <FavouritesList filters={filters}/>
         </>
     );

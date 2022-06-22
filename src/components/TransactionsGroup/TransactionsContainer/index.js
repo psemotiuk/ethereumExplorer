@@ -48,7 +48,7 @@ function createData(
   };
 }
 
-const TransacationsContainer = () => {
+const TransactionsContainer = () => {
   const [transactions, setTransactions] = useState([]);
   const location = useLocation();
   const [isTransasctionFetched, setIsTransactionsFetched] = useState(false);
@@ -206,4 +206,4 @@ const TransacationsContainer = () => {
   );
 };
 
-export default TransacationsContainer;
+export default TransactionsContainer;

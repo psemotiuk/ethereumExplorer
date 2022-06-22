@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -8,7 +8,7 @@ import TransactionsContainer from '../components/TransactionsGroup/TransactionsC
 import BlockDetails from '../components/BlockGroup/BlockDetails';
 import TransactionDetails from '../components/TransactionsGroup/TransactionDetails';
 import Home from '../pages/Home/Home';
-import Blocks from '../pages/Blocks';
+import Blocks from '../pages/Blocks/Blocks';
 import Header from '../components/Header';
 
 import '../App.css';
@@ -17,10 +17,11 @@ import FavouritesContext from "../context/favouritesContext";
 import PrevBlocks from "../pages/PrevBlocks/PrevBlocks";
 
 const AppRouter = () => {
+    const [idToRemove, setIdToRemove] = useState();
     return (
         <FavouritesContext>
             <Router>
-                <Header/>
+                <Header />
                 <div className="appContainer">
                     <Routes>
                         <Route path='/' element={<Home/>}/>

@@ -50,7 +50,7 @@ const TransactionDetails = () => {
           <div className='transactionDetailsRow'>
             <div className='column first'>Block</div>
             <div className='column second'>
-              <Link to={`/block/${transaction.blockNumber}`}>
+              <Link to={`/blocks/${transaction.blockNumber}`}>
                 <p className='blockListItemRowNumber'>
                   {transaction.blockNumber}
                 </p>
